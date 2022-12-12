@@ -1,5 +1,5 @@
 
-# Send Email with Sendinblue in Deno
+# Send Emails with Sendinblue in Deno
 
 <img src="./sendinblue-logo.png" />
 
