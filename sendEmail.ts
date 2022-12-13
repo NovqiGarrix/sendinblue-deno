@@ -10,7 +10,7 @@ export interface Message {
     sender: User;
 }
 
-export default async function sendEmail(options: Message): Promise<void> {
+export default async function sendEmail(options: Message, showLogs = true): Promise<void> {
 
     const SENDIN_BLUE_URL = "https://api.sendinblue.com/v3/smtp/email";
     const mailOptions: Message = options
@@ -31,9 +31,11 @@ export default async function sendEmail(options: Message): Promise<void> {
         const data = await resp.json();
         if (data?.message) throw new Error(data.message);
 
-        for (const user of mailOptions.to) {
-            console.log(`🔥 EMAIL SENT TO ${user.email} 🎯`);
-            console.log(JSON.stringify(data, null, 2));
+        if (showLogs) {
+            for (const user of mailOptions.to) {
+               console.log(`🔥 EMAIL SENT TO ${user.email} 🎯`);
+               console.log(JSON.stringify(data, null, 2));
+            }
         }
 
     } catch (error) {
